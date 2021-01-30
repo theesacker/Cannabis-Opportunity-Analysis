@@ -1,0 +1,122 @@
+"CAINC1 Personal Income Summary: Personal Income, Population, Per Capita Personal Income",,,,
+ ,,,,
+Bureau of Economic Analysis ,,,,
+County,,,,
+GeoFips,GeoName,LineCode,Description,2019
+41000,Oregon,1,Personal income (thousands of dollars),224346429
+41000,Oregon,2,Population (persons) 1/,4217737
+41000,Oregon,3,Per capita personal income (dollars) 2/,53191
+41001,"Baker, OR",1,Personal income (thousands of dollars),685166
+41001,"Baker, OR",2,Population (persons) 1/,16124
+41001,"Baker, OR",3,Per capita personal income (dollars) 2/,42494
+41003,"Benton, OR",1,Personal income (thousands of dollars),4534024
+41003,"Benton, OR",2,Population (persons) 1/,93053
+41003,"Benton, OR",3,Per capita personal income (dollars) 2/,48725
+41005,"Clackamas, OR",1,Personal income (thousands of dollars),25812808
+41005,"Clackamas, OR",2,Population (persons) 1/,418187
+41005,"Clackamas, OR",3,Per capita personal income (dollars) 2/,61726
+41007,"Clatsop, OR",1,Personal income (thousands of dollars),1893791
+41007,"Clatsop, OR",2,Population (persons) 1/,40224
+41007,"Clatsop, OR",3,Per capita personal income (dollars) 2/,47081
+41009,"Columbia, OR",1,Personal income (thousands of dollars),2409293
+41009,"Columbia, OR",2,Population (persons) 1/,52354
+41009,"Columbia, OR",3,Per capita personal income (dollars) 2/,46019
+41011,"Coos, OR",1,Personal income (thousands of dollars),2994046
+41011,"Coos, OR",2,Population (persons) 1/,64487
+41011,"Coos, OR",3,Per capita personal income (dollars) 2/,46429
+41013,"Crook, OR",1,Personal income (thousands of dollars),1039221
+41013,"Crook, OR",2,Population (persons) 1/,24404
+41013,"Crook, OR",3,Per capita personal income (dollars) 2/,42584
+41015,"Curry, OR",1,Personal income (thousands of dollars),1042502
+41015,"Curry, OR",2,Population (persons) 1/,22925
+41015,"Curry, OR",3,Per capita personal income (dollars) 2/,45474
+41017,"Deschutes, OR",1,Personal income (thousands of dollars),11159204
+41017,"Deschutes, OR",2,Population (persons) 1/,197692
+41017,"Deschutes, OR",3,Per capita personal income (dollars) 2/,56447
+41019,"Douglas, OR",1,Personal income (thousands of dollars),4698282
+41019,"Douglas, OR",2,Population (persons) 1/,110980
+41019,"Douglas, OR",3,Per capita personal income (dollars) 2/,42334
+41021,"Gilliam, OR",1,Personal income (thousands of dollars),105942
+41021,"Gilliam, OR",2,Population (persons) 1/,1912
+41021,"Gilliam, OR",3,Per capita personal income (dollars) 2/,55409
+41023,"Grant, OR",1,Personal income (thousands of dollars),308754
+41023,"Grant, OR",2,Population (persons) 1/,7199
+41023,"Grant, OR",3,Per capita personal income (dollars) 2/,42888
+41025,"Harney, OR",1,Personal income (thousands of dollars),309164
+41025,"Harney, OR",2,Population (persons) 1/,7393
+41025,"Harney, OR",3,Per capita personal income (dollars) 2/,41818
+41027,"Hood River, OR",1,Personal income (thousands of dollars),1316983
+41027,"Hood River, OR",2,Population (persons) 1/,23382
+41027,"Hood River, OR",3,Per capita personal income (dollars) 2/,56325
+41029,"Jackson, OR",1,Personal income (thousands of dollars),10669698
+41029,"Jackson, OR",2,Population (persons) 1/,220944
+41029,"Jackson, OR",3,Per capita personal income (dollars) 2/,48291
+41031,"Jefferson, OR",1,Personal income (thousands of dollars),866858
+41031,"Jefferson, OR",2,Population (persons) 1/,24658
+41031,"Jefferson, OR",3,Per capita personal income (dollars) 2/,35155
+41033,"Josephine, OR",1,Personal income (thousands of dollars),3810451
+41033,"Josephine, OR",2,Population (persons) 1/,87487
+41033,"Josephine, OR",3,Per capita personal income (dollars) 2/,43554
+41035,"Klamath, OR",1,Personal income (thousands of dollars),2839572
+41035,"Klamath, OR",2,Population (persons) 1/,68238
+41035,"Klamath, OR",3,Per capita personal income (dollars) 2/,41613
+41037,"Lake, OR",1,Personal income (thousands of dollars),340162
+41037,"Lake, OR",2,Population (persons) 1/,7869
+41037,"Lake, OR",3,Per capita personal income (dollars) 2/,43228
+41039,"Lane, OR",1,Personal income (thousands of dollars),18087217
+41039,"Lane, OR",2,Population (persons) 1/,382067
+41039,"Lane, OR",3,Per capita personal income (dollars) 2/,47340
+41041,"Lincoln, OR",1,Personal income (thousands of dollars),2294997
+41041,"Lincoln, OR",2,Population (persons) 1/,49962
+41041,"Lincoln, OR",3,Per capita personal income (dollars) 2/,45935
+41043,"Linn, OR",1,Personal income (thousands of dollars),5816653
+41043,"Linn, OR",2,Population (persons) 1/,129749
+41043,"Linn, OR",3,Per capita personal income (dollars) 2/,44830
+41045,"Malheur, OR",1,Personal income (thousands of dollars),1057034
+41045,"Malheur, OR",2,Population (persons) 1/,30571
+41045,"Malheur, OR",3,Per capita personal income (dollars) 2/,34576
+41047,"Marion, OR",1,Personal income (thousands of dollars),15706672
+41047,"Marion, OR",2,Population (persons) 1/,347818
+41047,"Marion, OR",3,Per capita personal income (dollars) 2/,45158
+41049,"Morrow, OR",1,Personal income (thousands of dollars),563965
+41049,"Morrow, OR",2,Population (persons) 1/,11603
+41049,"Morrow, OR",3,Per capita personal income (dollars) 2/,48605
+41051,"Multnomah, OR",1,Personal income (thousands of dollars),49399774
+41051,"Multnomah, OR",2,Population (persons) 1/,812855
+41051,"Multnomah, OR",3,Per capita personal income (dollars) 2/,60773
+41053,"Polk, OR",1,Personal income (thousands of dollars),3692806
+41053,"Polk, OR",2,Population (persons) 1/,86085
+41053,"Polk, OR",3,Per capita personal income (dollars) 2/,42897
+41055,"Sherman, OR",1,Personal income (thousands of dollars),101353
+41055,"Sherman, OR",2,Population (persons) 1/,1780
+41055,"Sherman, OR",3,Per capita personal income (dollars) 2/,56940
+41057,"Tillamook, OR",1,Personal income (thousands of dollars),1240385
+41057,"Tillamook, OR",2,Population (persons) 1/,27036
+41057,"Tillamook, OR",3,Per capita personal income (dollars) 2/,45879
+41059,"Umatilla, OR",1,Personal income (thousands of dollars),3268316
+41059,"Umatilla, OR",2,Population (persons) 1/,77950
+41059,"Umatilla, OR",3,Per capita personal income (dollars) 2/,41928
+41061,"Union, OR",1,Personal income (thousands of dollars),1119594
+41061,"Union, OR",2,Population (persons) 1/,26835
+41061,"Union, OR",3,Per capita personal income (dollars) 2/,41721
+41063,"Wallowa, OR",1,Personal income (thousands of dollars),331884
+41063,"Wallowa, OR",2,Population (persons) 1/,7208
+41063,"Wallowa, OR",3,Per capita personal income (dollars) 2/,46044
+41065,"Wasco, OR",1,Personal income (thousands of dollars),1163239
+41065,"Wasco, OR",2,Population (persons) 1/,26682
+41065,"Wasco, OR",3,Per capita personal income (dollars) 2/,43596
+41067,"Washington, OR",1,Personal income (thousands of dollars),38527576
+41067,"Washington, OR",2,Population (persons) 1/,601592
+41067,"Washington, OR",3,Per capita personal income (dollars) 2/,64043
+41069,"Wheeler, OR",1,Personal income (thousands of dollars),52438
+41069,"Wheeler, OR",2,Population (persons) 1/,1332
+41069,"Wheeler, OR",3,Per capita personal income (dollars) 2/,39368
+41071,"Yamhill, OR",1,Personal income (thousands of dollars),5086605
+41071,"Yamhill, OR",2,Population (persons) 1/,107100
+41071,"Yamhill, OR",3,Per capita personal income (dollars) 2/,47494
+Legend / Footnotes:,,,,
+1/ Census Bureau midyear population estimates. Estimates for 2010-2019 reflect county population estimates available as of March 2020.,,,,
+2/ Per capita personal income was computed using Census Bureau midyear population estimates. Estimates for 2010-2019 reflect county population estimates available as of March 2020.,,,,
+"Metropolitan Areas are defined (geographically delineated) by the Office of Management and Budget (OMB) bulletin no. 20-01 issued March 6, 2020.",,,,
+Note. All dollar estimates are in thousands of current dollars (not adjusted for inflation). Calculations are performed on unrounded data.,,,,
+"Last updated: November 17, 2020-- new statistics for 2019; revised statistics for 2010-2018.",,,,
