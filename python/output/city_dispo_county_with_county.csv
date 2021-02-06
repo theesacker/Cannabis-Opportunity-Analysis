@@ -1,4 +1,4 @@
-City,2020,2019,long,lat,Dispensary Count,Population per Dispensary,County
+city,2020_pop,2019_pop,long,lat,dispensary_count,population_per_dispensary,county
 Albany,50158,55338,-123.1059282,44.6365107,8,6269.75,Linn
 Ashland,20078,21281,-122.7094767,42.1945758,5,4015.6,Jackson
 Astoria,9477,10015,-123.8312534,46.1878841,8,1184.625,Clatsop
