@@ -105,9 +105,9 @@ def county():
 
     # Create a dictionary from row of data and append to a list of dictionaries
     county_sales = []
-    for month, personal_income, population, per_capita_income, dispensary_count, population_per_dispensary, sales, sales_per_capita, avg_sales_per_dispensary, avg_sale_dispo_per_capita, percent_of_sales_over_income in results:
+    for county, personal_income, population, per_capita_income, dispensary_count, population_per_dispensary, sales, sales_per_capita, avg_sales_per_dispensary, avg_sale_dispo_per_capita, percent_of_sales_over_income in results:
         county_dict = {}
-        county_dict["county"] = month
+        county_dict["county"] = county
         county_dict["personal_income"] = str(personal_income)
         county_dict["population"] = str(population)
         county_dict["per_capita_income"] = str(per_capita_income)
