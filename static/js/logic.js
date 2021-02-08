@@ -14,12 +14,16 @@ var worldmap = L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/
   zoomOffset: -1,
   id: "mapbox/streets-v11",
   accessToken: API_KEY
-});
+}).addTo(myMap);
 
 d3.json(queryUrl).then(function (data) {
-  console.log(data)
+  console.log(data.features);
+  console.log(data.features[24].properties.altname);
+  console.log(data.features[0].geometry);
+
+
   // Creating a geoJSON layer with the retrieved data
-  L.geoJson(data, {
+  L.geoJson(data.features, {
     // Style each feature (in this case a neighborhood)
     style: function (feature) {
       return {
@@ -54,7 +58,7 @@ d3.json(queryUrl).then(function (data) {
         }
       });
       // Giving each feature a pop-up with information pertinent to it
-      layer.bindPopup("<h1>" + feature.properties.altname + "</h1>");
+      layer.bindPopup("<h2>" + feature.properties.altname + " County</h2>");
 
     }
   }).addTo(myMap);
