@@ -45,7 +45,7 @@ def retail():
     # Create our session (link) from Python to the DB
     session = Session(engine)
 
-    # Query all pizza data
+    # Query all retail store data
     results = session.query(Retail_map.dispensary_name, Retail_map.postal_city, Retail_map.county, Retail_map.full_address, Retail_map.long, Retail_map.lat).all()
 
     session.close()
@@ -70,7 +70,7 @@ def city():
     # Create our session (link) from Python to the DB
     session = Session(engine)
 
-    # Query all pizza data
+    # Query all city data
     results = session.query(City_dispo.city, City_dispo.twenty_pop, City_dispo.nineteen_pop, City_dispo.long, City_dispo.lat, City_dispo.dispensary_count, City_dispo.population_per_dispensary, City_dispo.county).all()
 
     session.close()
@@ -98,14 +98,14 @@ def county():
     # Create our session (link) from Python to the DB
     session = Session(engine)
 
-    # Query all pizza data
-    results = session.query(County_sales.county, County_sales.personal_income, County_sales.population, County_sales.per_capita_income, County_sales.dispensary_count, County_sales.population_per_dispensary, County_sales.sales, County_sales.sales_per_capita, County_sales.avg_sales_per_dispensary, County_sales.avg_sale_dispo_per_capita, County_sales.percent_of_sales_over_income).all()
+    # Query all county sales data
+    results = session.query(County_sales.county, County_sales.personal_income, County_sales.population, County_sales.per_capita_income, County_sales.dispensary_count, County_sales.population_per_dispensary, County_sales.sales, County_sales.sales_per_capita, County_sales.avg_sales_per_dispensary, County_sales.avg_sale_dispo_per_capita, County_sales.percent_of_sales_over_income, County_sales.lat , County_sales.long).all()
 
     session.close()
 
     # Create a dictionary from row of data and append to a list of dictionaries
     county_sales = []
-    for county, personal_income, population, per_capita_income, dispensary_count, population_per_dispensary, sales, sales_per_capita, avg_sales_per_dispensary, avg_sale_dispo_per_capita, percent_of_sales_over_income in results:
+    for county, personal_income, population, per_capita_income, dispensary_count, population_per_dispensary, sales, sales_per_capita, avg_sales_per_dispensary, avg_sale_dispo_per_capita, percent_of_sales_over_income, lat, longg in results:
         county_dict = {}
         county_dict["county"] = county
         county_dict["personal_income"] = str(personal_income)
@@ -118,6 +118,7 @@ def county():
         county_dict["avg_sales_per_dispensary"] = str(avg_sales_per_dispensary)
         county_dict["avg_sale_dispo_per_capita"] = str(avg_sale_dispo_per_capita)
         county_dict["percent_of_sales_over_income"] = str(percent_of_sales_over_income)
+        county_dict["coords"] = [str(lat), str(longg)]
         county_sales.append(county_dict)
 
     # turn the list of dicts into an array of objects
@@ -128,7 +129,7 @@ def yearly():
     # Create our session (link) from Python to the DB
     session = Session(engine)
 
-    # Query all pizza data
+    # Query all yearly sales data
     results = session.query(Sales_yoy.nineteen_months, Sales_yoy.nineteen_sales, Sales_yoy.twenty_months, Sales_yoy.twenty_sales).all()
 
     session.close()
