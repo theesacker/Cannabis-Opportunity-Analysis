@@ -136,11 +136,10 @@ def yearly():
 
     # Create a dictionary from row of data and append to a list of dictionaries
     yearly_sales = []
-    for nine_month, nine_sales, twenty_month, twenty_sales in results:
+    for month, nine_sales, twenty_sales in results:
         yearly_dict = {}
-        yearly_dict["nine_month"] = str(nine_month)
+        yearly_dict["month"] = str(month)
         yearly_dict["nine_sales"] = str(nine_sales)
-        yearly_dict["twenty_month"] = str(twenty_month)
         yearly_dict["twenty_sales"] = str(twenty_sales)
 
         yearly_sales.append(yearly_dict)
