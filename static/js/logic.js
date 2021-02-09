@@ -1,5 +1,5 @@
 // Store our API endpoint inside queryUrl
-var queryUrl = "../data/oregon_counties.geojson";
+var queryUrl = "static/data/oregon_counties.geojson";
 console.log("Hi")
 
 // Perform a GET request to the query URL
