@@ -130,7 +130,7 @@ def yearly():
     session = Session(engine)
 
     # Query all yearly sales data
-    results = session.query(Sales_yoy.nineteen_months, Sales_yoy.nineteen_sales, Sales_yoy.twenty_months, Sales_yoy.twenty_sales).all()
+    results = session.query(Sales_yoy.months, Sales_yoy.nineteen_sales, Sales_yoy.twenty_sales).all()
 
     session.close()
 
