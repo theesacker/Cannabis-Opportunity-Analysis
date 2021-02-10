@@ -6,7 +6,7 @@ d3.json(lineQuery).then(function (data) {
     var nine = data.map(month => month.nine_sales)
     var twenty = data.map(month => month.twenty_sales)
     var months = data.map(month => month.month)
-    // var salesData = data;
+    var config = {responsive: true};
 
     // console.log(nine);
     // console.log(twenty);
@@ -66,5 +66,5 @@ d3.json(lineQuery).then(function (data) {
     console.log(d3.max(twenty))
 
     // This will use default parameters for the layout
-    Plotly.newPlot("line-graph", data, layout);
+    Plotly.newPlot("line-graph", data, layout, config);
 });

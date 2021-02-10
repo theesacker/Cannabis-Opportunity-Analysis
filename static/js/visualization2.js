@@ -1,6 +1,5 @@
 // Store our API endpoint inside queryUrl
 var queryUrl = "static/data/oregon_counties.geojson";
-console.log("Hi")
 
 var myMap = L.map("mapid", {
   center: [44., -120.67],
@@ -133,11 +132,11 @@ d3.json(queryUrlCounty).then(function (data) {
       layer.bindPopup(`
       ${feature.properties.county} County 
         <br> Sales: $${feature.properties.sales} 
-        <br> Store #: ${feature.properties.dispensary_count}
+        <br> Dispensary Count: ${feature.properties.dispensary_count}
         <br> Avg. Sales: $${feature.properties.avg_sales_per_dispensary}
         <br> Population: ${feature.properties.population}
         <br> Avg. Income: $${feature.properties.per_capita_income}
-        <br> % of Income: ${feature.properties.percent_of_sales_over_income}%
+        <br> % of sales over Income: ${feature.properties.percent_of_sales_over_income}%
         `)
     }
   }).addTo(countySales);
@@ -153,7 +152,7 @@ var baseMaps = {
 var overlayMaps = {
   "Store": stores,
   "County Boundaries": countyArea,
-  "Cannabis Data" : countySales
+  "County Data" : countySales
 };
 
 

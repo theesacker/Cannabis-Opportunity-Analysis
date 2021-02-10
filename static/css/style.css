@@ -8,17 +8,30 @@ body {
 body,
 html {
   height: 100%;
+  
 }
 
 
-#mapid,
 #line-graph,
 #bar-one,
 #bar-two {
   height: 600px;
 }
 
-
+.main-header {
+  margin-top: 15px;
+}
+.my-graphs {
+  margin-top: 15px;
+  width:90%;
+}
+#mapid {
+  height: 1000px;
+}
+.my-map {
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+}
 
 .info {
   padding: 6px 8px;
