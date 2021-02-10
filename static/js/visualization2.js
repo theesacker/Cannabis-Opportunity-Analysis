@@ -3,7 +3,7 @@ var queryUrl = "static/data/oregon_counties.geojson";
 console.log("Hi")
 
 var myMap = L.map("mapid", {
-  center: [45.52, -122.67],
+  center: [44., -120.67],
   zoom: 7
 });
 
@@ -16,14 +16,25 @@ var worldmap = L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/
   accessToken: API_KEY
 }).addTo(myMap);
 
-d3.json(queryUrl).then(function (data) {
-  console.log(data.features);
-  console.log(data.features[24].properties.altname);
-  console.log(data.features[0].geometry);
+var greyscaleMap = L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
+  attribution: "© <a href='https://www.mapbox.com/about/maps/'>Mapbox</a> © <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> <strong><a href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a></strong>",
+  tileSize: 512,
+  maxZoom: 18,
+  zoomOffset: -1,
+  id: "mapbox/light-v10",
+  accessToken: API_KEY
+});
 
+
+
+var stores = new L.layerGroup();
+var countyArea = new L.layerGroup();
+var countySales = new L.layerGroup();
+
+d3.json(queryUrl).then(function (county) {
 
   // Creating a geoJSON layer with the retrieved data
-  L.geoJson(data.features, {
+  L.geoJson(county.features, {
     // Style each feature (in this case a neighborhood)
     style: function (feature) {
       return {
@@ -51,80 +62,104 @@ d3.json(queryUrl).then(function (data) {
           layer.setStyle({
             fillOpacity: 0.5
           });
-        },
-        // When a feature (neighborhood) is clicked, it is enlarged to fit the screen
-        click: function (event) {
-          myMap.fitBounds(event.target.getBounds());
         }
+        // When a feature (neighborhood) is clicked, it is enlarged to fit the screen
+        // click: function (event) {
+        //   myMap.fitBounds(event.target.getBounds());
+        // }
       });
       // Giving each feature a pop-up with information pertinent to it
       layer.bindPopup("<h2>" + feature.properties.altname + " County</h2>");
-
     }
-  }).addTo(myMap);
+  }).addTo(countyArea);
+});
+
+// Retail Map Function
+var queryUrlRetail = "/retail_map";
+d3.json(queryUrlRetail).then(function (data) {
+  var jsonFeatures = [];
+  data.forEach(function (store) {
+    var lat = store.coords[0];
+    var lon = store.coords[1];
+    var feature = {
+      type: 'Feature',
+      properties: store,
+      geometry: {
+        type: 'Point',
+        coordinates: [lon, lat]
+      }
+    };
+    jsonFeatures.push(feature);
+  })
+  var geoJson = { type: 'FeatureCollection', features: jsonFeatures };
+  console.log(geoJson)
+  L.geoJson(geoJson, {
+    pointToLayer: function (feature, latlng) {
+      return L.marker(latlng);
+    },
+    onEachFeature: function (feature, layer) {
+      layer.bindPopup(`
+      ${feature.properties.name} 
+      <br>${feature.properties.address}
+      `)
+    }
+  }).addTo(stores);
+});
+
+// County Data Map Function
+var queryUrlCounty = "/county_sales";
+d3.json(queryUrlCounty).then(function (data) {
+  var jsonFeatures = [];
+  data.forEach(function (sales) {
+    var lat = sales.coords[0];
+    var lon = sales.coords[1];
+    var feature = {
+      type: 'Feature',
+      properties: sales,
+      geometry: {
+        type: 'Point',
+        coordinates: [lon, lat]
+      }
+    };
+    jsonFeatures.push(feature);
+  })
+  var geoJson = { type: 'FeatureCollection', features: jsonFeatures };
+  console.log(geoJson)
+  L.geoJson(geoJson, {
+    pointToLayer: function (feature, latlng) {
+      return L.marker(latlng);
+    },
+    onEachFeature: function (feature, layer) {
+      layer.bindPopup(`
+      ${feature.properties.county} County 
+        <br> Sales: $${feature.properties.sales} 
+        <br> Store #: ${feature.properties.dispensary_count}
+        <br> Avg. Sales: $${feature.properties.avg_sales_per_dispensary}
+        <br> Population: ${feature.properties.population}
+        <br> Avg. Income: $${feature.properties.per_capita_income}
+        <br> % of Income: ${feature.properties.percent_of_sales_over_income}%
+        `)
+    }
+  }).addTo(countySales);
 });
 
 
 
-// // Perform a GET request to the query URL
-// d3.json(queryUrl).then(function (data) {
-//   // The data.features object is in the GeoJSON standard
-//   console.log(data.features);
-
-//     // Do we need to concat our LatLng
-//   function pointToLayerFunc(feature, latlng) {
-//     var geojsonMarkerOptions = {
-// // FILL ME IN!!!
-//     };
-//     return L.circleMarker(latlng, geojsonMarkerOptions);
-//   }
-
-//   // var counties = L.geoJSON(data.features, {
-//   //   onEachFeature: onEachFeatureFunc,
-//   //   pointToLayer: pointToLayerFunc
-//   // });
+// Linking Maps with Functions/Data
+var baseMaps = {
+  "World Map": worldmap,
+  "Gray Scale" : greyscaleMap
+};
+var overlayMaps = {
+  "Store": stores,
+  "County Boundaries": countyArea,
+  "Cannabis Data" : countySales
+};
 
 
-//     var worldmap = L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
-//     attribution: "© <a href='https://www.mapbox.com/about/maps/'>Mapbox</a> © <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> <strong><a href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a></strong>",
-//     tileSize: 512,
-//     maxZoom: 18,
-//     zoomOffset: -1,
-//     id: "mapbox/satellite-v9",
-//     accessToken: API_KEY
-//   });
-
-//   var darkmap = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
-//     attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
-//     maxZoom: 18,
-//     id: "dark-v10",
-//     accessToken: API_KEY
-//   });
-
-//   // Define a baseMaps object to hold our base layers
-//   var baseMaps = {
-//     "World Map": worldmap,
-//     "Dark Map": darkmap
-//   };
-
-//   // Create overlay object to hold our overlay layer
-//   // var overlayMaps = {
-//   //   counties: counties
-//   // };
+// add layer to control map
+L.control.layers(baseMaps, overlayMaps, {
+  collapsed: false
+}).addTo(myMap);
 
 
-//   // Create our map, giving it the satalite map and earthquakes layers to display on load
-//   var myMap = L.map("mapid", {
-//     center: [45.52, -122.67],
-//     zoom: 13,
-//     layers: [worldmap]
-//   });
-
-
-//   // Create a layer control
-//   L.control.layers(baseMaps {
-//     collapsed: false
-//   }).addTo(myMap);
-
-
-// })
