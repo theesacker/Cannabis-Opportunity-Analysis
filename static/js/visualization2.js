@@ -16,6 +16,17 @@ var worldmap = L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/
   accessToken: API_KEY
 }).addTo(myMap);
 
+var greyscaleMap = L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
+  attribution: "© <a href='https://www.mapbox.com/about/maps/'>Mapbox</a> © <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> <strong><a href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a></strong>",
+  tileSize: 512,
+  maxZoom: 18,
+  zoomOffset: -1,
+  id: "mapbox/light-v10",
+  accessToken: API_KEY
+});
+
+
+
 var stores = new L.layerGroup();
 var countyArea = new L.layerGroup();
 var countySales = new L.layerGroup();
@@ -87,7 +98,10 @@ d3.json(queryUrlRetail).then(function (data) {
       return L.marker(latlng);
     },
     onEachFeature: function (feature, layer) {
-      layer.bindPopup(`${feature.properties.name} <br>${feature.properties.address}`)
+      layer.bindPopup(`
+      ${feature.properties.name} 
+      <br>${feature.properties.address}
+      `)
     }
   }).addTo(stores);
 });
@@ -133,16 +147,19 @@ d3.json(queryUrlCounty).then(function (data) {
 
 // Linking Maps with Functions/Data
 var baseMaps = {
-  "WorldMap": worldmap
+  "World Map": worldmap,
+  "Gray Scale" : greyscaleMap
 };
 var overlayMaps = {
   "Store": stores,
   "County Boundaries": countyArea,
-  "County Data": countySales
-  // "County Data" : countyData
+  "Cannabis Data" : countySales
 };
+
 
 // add layer to control map
 L.control.layers(baseMaps, overlayMaps, {
   collapsed: false
 }).addTo(myMap);
+
+
