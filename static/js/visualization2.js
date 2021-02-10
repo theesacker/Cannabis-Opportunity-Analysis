@@ -25,7 +25,6 @@ var greyscaleMap = L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/
 });
 
 
-
 var stores = new L.layerGroup();
 var countyArea = new L.layerGroup();
 var countySales = new L.layerGroup();
@@ -68,9 +67,30 @@ d3.json(queryUrl).then(function (county) {
         // }
       });
       // Giving each feature a pop-up with information pertinent to it
-      layer.bindPopup("<h3>" + feature.properties.altname + " County</h3><h3> Sales in 2019: $" + feature.properties.sales + "</h3>");
+      layer.bindPopup("<h3>" + feature.properties.altname + " County</h3><h3> Sales in 2019: $" + commafy(feature.properties.sales) + "</h3>");
     }
   }).addTo(countyArea);
+
+    // code to try and make map legend
+    var legend = L.control({ position: 'bottomright' });
+
+    legend.onAdd = function (map) {
+  
+      var div = L.DomUtil.create('div', 'info legend'),
+        grades = [0, 500000, 1000000, 5000000, 10000000, 25000000, 50000000, 200000000],
+        labels = [];
+  
+      // loop through our density intervals and generate a label with a colored square for each interval
+      for (var i = 0; i < grades.length; i++) {
+        div.innerHTML +=
+          '<i style="background:' + countyColor(grades[i] + 1) + '"></i> ' +
+          "$" + grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+      }
+  
+      return div;
+    };
+  
+    legend.addTo(myMap);
 });
 
 // Retail Map Function
@@ -129,11 +149,11 @@ d3.json(queryUrlCounty).then(function (data) {
     onEachFeature: function (feature, layer) {
       layer.bindPopup(`
       <strong>${feature.properties.county} County</strong> 
-        <br> Sales: <strong>$${feature.properties.sales}</strong> 
+        <br> Sales: <strong>$${commafy(feature.properties.sales)}</strong> 
         <br> Dispensary Count: <strong>${feature.properties.dispensary_count}</strong>
-        <br> Avg. Sales: <strong>$${feature.properties.avg_sales_per_dispensary}</strong>
-        <br> Population: <strong>${feature.properties.population}</strong>
-        <br> Avg. Income: <strong>$${feature.properties.per_capita_income}</strong>
+        <br> Avg. Sales: <strong>$${commafy(feature.properties.avg_sales_per_dispensary)}</strong>
+        <br> Population: <strong>${commafy(feature.properties.population)}</strong>
+        <br> Avg. Income: <strong>$${commafy(feature.properties.per_capita_income)}</strong>
         <br> % of sales over Income: <strong>${feature.properties.percent_of_sales_over_income}%</strong>
         `)
     }
@@ -144,28 +164,7 @@ d3.json(queryUrlCounty).then(function (data) {
   }).addTo(myMap);
 
 
-  // // code to try and make map legend
-  // var legend = L.control({ position: 'bottomleft' });
 
-  // legend.onAdd = function (map) {
-
-  //   var div = L.DomUtil.create('div', 'info legend'),
-  //     grades = [0, 500000, 1000000, 5000000, 10000000, 25000000, 50000000, 200000000],
-  //     labels = [];
-
-  //   // loop through our density intervals and generate a label with a colored square for each interval
-  //   for (var i = 0; i < grades.length; i++) {
-  //     div.innerHTML +=
-  //       '<i style="background:' + depthColor(grades[i] + 1) + '"></i> ' +
-  //       grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
-  //     console.log(grades[i])
-  //     console.log(grades[i + 1])
-  //   }
-
-  //   return div;
-  // };
-
-  // legend.addTo(myMap);
 
 });
 
@@ -190,7 +189,7 @@ var overlayMaps = {
 
 
 function countyColor(county) {
-  return county >= 200000000 ? '#63f542' :
+  return county >= 200000000 ? '#43c900' :
     county >= 50000000 ? '#42f599' :
       county >= 25000000 ? '#42f5ec' :
         county >= 10000000 ? '#42adf5' :
@@ -199,3 +198,14 @@ function countyColor(county) {
               county >= 500000 ? '#fa20a3' :
                 '#fa2020';
 };
+
+function commafy( num ) {
+  var str = num.toString().split('.');
+  if (str[0].length >= 4) {
+      str[0] = str[0].replace(/(\d)(?=(\d{3})+$)/g, '$1,');
+  }
+  if (str[1] && str[1].length >= 4) {
+      str[1] = str[1].replace(/(\d{3})/g, '$1 ');
+  }
+  return str.join('.');
+}
