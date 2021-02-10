@@ -1,17 +1,10 @@
 var lineQuery = "/yearly_sales"
 
 d3.json(lineQuery).then(function (data) {
-    // var nineSales = data.nineSales
-    console.log(data);
     var nine = data.map(month => month.nine_sales)
     var twenty = data.map(month => month.twenty_sales)
     var months = data.map(month => month.month)
     var config = {responsive: true};
-
-    // console.log(nine);
-    // console.log(twenty);
-    // var months = salesMonth.month
-    console.log(months);
 
     var monthNumber = {
         "January": 1,
@@ -51,19 +44,25 @@ d3.json(lineQuery).then(function (data) {
     };
     // The data array consists of both traces
     var data = [trace1, trace2];
-    console.log(trace1);
-    console.log(trace2);
     var layout = {
         title: "2019 to 2020 YOY Cannabis Sales",
         xaxis: {
-            range: [0, 12]
+            range: [0, 11],
+            title: {
+                text: "Month"
+            },
+            tickmode: "array",
+            tickvals: [0,1,2,3,4,5,6,7,8,9,10,11],
+            ticktext: months
         },
         yaxis: {
             autorange: true,
-            type: "linear"
+            type: "linear",
+            title: {
+                text: "Dollars Spent"
+            }
         }
     };
-    console.log(d3.max(twenty))
 
     // This will use default parameters for the layout
     Plotly.newPlot("line-graph", data, layout, config);
