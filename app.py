@@ -115,9 +115,9 @@ def county():
         county_dict["population_per_dispensary"] = str(population_per_dispensary)
         county_dict["sales"] = str(sales)
         county_dict["sales_per_capita"] = str(sales_per_capita)
-        county_dict["avg_sales_per_dispensary"] = str(avg_sales_per_dispensary)
-        county_dict["avg_sale_dispo_per_capita"] = str(avg_sale_dispo_per_capita)
-        county_dict["percent_of_sales_over_income"] = str(percent_of_sales_over_income)
+        county_dict["avg_sales_per_dispensary"] = str(round(avg_sales_per_dispensary, 2))
+        county_dict["avg_sale_dispo_per_capita"] = str(round(avg_sale_dispo_per_capita, 2))
+        county_dict["percent_of_sales_over_income"] = str(round(percent_of_sales_over_income, 2))
         county_dict["coords"] = [str(lat), str(longg)]
         county_sales.append(county_dict)
 
