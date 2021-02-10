@@ -17,7 +17,8 @@ var worldmap = L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/
 }).addTo(myMap);
 
 var stores = new L.layerGroup();
-var counties = new L.layerGroup();
+var countyArea = new L.layerGroup();
+var countySales = new L.layerGroup();
 
 d3.json(queryUrl).then(function (county) {
 
@@ -59,7 +60,7 @@ d3.json(queryUrl).then(function (county) {
       // Giving each feature a pop-up with information pertinent to it
       layer.bindPopup("<h2>" + feature.properties.altname + " County</h2>");
     }
-  }).addTo(counties);
+  }).addTo(countyArea);
 });
 
 // Retail Map Function
@@ -80,9 +81,55 @@ d3.json(queryUrlRetail).then(function (data) {
     jsonFeatures.push(feature);
   })
   var geoJson = { type: 'FeatureCollection', features: jsonFeatures };
-
-  L.geoJson(geoJson).addTo(stores);
+  console.log(geoJson)
+  L.geoJson(geoJson, {
+    pointToLayer: function (feature, latlng) {
+      return L.marker(latlng);
+    },
+    onEachFeature: function (feature, layer) {
+      layer.bindPopup(`${feature.properties.name} <br>${feature.properties.address}`)
+    }
+  }).addTo(stores);
 });
+
+// County Data Map Function
+var queryUrlCounty = "/county_sales";
+d3.json(queryUrlCounty).then(function (data) {
+  var jsonFeatures = [];
+  data.forEach(function (sales) {
+    var lat = sales.coords[0];
+    var lon = sales.coords[1];
+    var feature = {
+      type: 'Feature',
+      properties: sales,
+      geometry: {
+        type: 'Point',
+        coordinates: [lon, lat]
+      }
+    };
+    jsonFeatures.push(feature);
+  })
+  var geoJson = { type: 'FeatureCollection', features: jsonFeatures };
+  console.log(geoJson)
+  L.geoJson(geoJson, {
+    pointToLayer: function (feature, latlng) {
+      return L.marker(latlng);
+    },
+    onEachFeature: function (feature, layer) {
+      layer.bindPopup(`
+      ${feature.properties.county} County 
+        <br> Sales: $${feature.properties.sales} 
+        <br> Store #: ${feature.properties.dispensary_count}
+        <br> Avg. Sales: $${feature.properties.avg_sales_per_dispensary}
+        <br> Population: ${feature.properties.population}
+        <br> Avg. Income: $${feature.properties.per_capita_income}
+        <br> % of Income: ${feature.properties.percent_of_sales_over_income}%
+        `)
+    }
+  }).addTo(countySales);
+});
+
+
 
 // Linking Maps with Functions/Data
 var baseMaps = {
@@ -90,7 +137,9 @@ var baseMaps = {
 };
 var overlayMaps = {
   "Store": stores,
-  "County": counties
+  "County Boundaries": countyArea,
+  "County Data": countySales
+  // "County Data" : countyData
 };
 
 // add layer to control map
