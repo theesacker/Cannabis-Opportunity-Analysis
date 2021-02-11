@@ -14,11 +14,11 @@ d3.json("county_sales").then(function (data) {
         x: incomeCountyNames,
         y: totalIncome,
         text: data.map(county => "Population: " + commafy(county.population) + "<br />Dispensary Count: " + county.dispensary_count + "<br />Dispensaries over Population: " + commafy(county.population_per_dispensary)),
-        name: "Total Income per County",
+        name: "2019 Total Income per County",
         type: "bar"
     }];
     var incomeLayout = {
-        title: "Total Income per County",
+        title: "2019 Total Income per County",
         margin: {
             l: 100,
             r: 100,
@@ -45,11 +45,11 @@ d3.json("county_sales").then(function (data) {
         x: incomeCountyNames,
         y: totalSales,
         text: data.map(county => "Population: " + commafy(county.population) + "<br />Dispensary Count: " + county.dispensary_count + "<br />Dispensaries over Population: " + commafy(county.population_per_dispensary)),
-        name: "Total Sales per County",
+        name: "2019 Total Sales per County",
         type: "bar"
     }];
     var incomeLayout = {
-        title: "Total Sales per County",
+        title: "2019 Total Sales per County",
         margin: {
             l: 100,
             r: 100,
@@ -79,20 +79,20 @@ d3.json("county_sales").then(function (data) {
         x: countyNames,
         y: avg_sale_dispo_per_capita,
         text: data.map(county => "Average Sales per Dispensary per Capita: $" + commafy(county.avg_sale_dispo_per_capita) + "<br />Dispensary Count: " + county.dispensary_count + "<br />Population per Dispensary: " + commafy(county.population_per_dispensary)),
-        name: "Average Sales Per Dispensary per Capita",
+        name: "2019 Average Sales Per Dispensary per Capita",
         type: "bar"
     };
     var salesPerCapitaTrace = {
         x: countyNames,
         y: salesPerCapita,
         text: data.map(county => "Sales per Capita: $" + commafy(county.sales_per_capita) + "<br />Sales: $" + commafy(county.sales) + "<br />Population: " + commafy(county.population)),
-        name: "Sales per Capita",
+        name: "2019 Sales per Capita",
         type: "bar"
     };
 
     var thirdChartData = [avg_dispo_cap_data, salesPerCapitaTrace]
     var layout = {
-        title: "Average Sales Per Dispensary per Capita",
+        title: "2019 Average Sales Per Dispensary per Capita",
         margin: {
             l: 100,
             r: 100,
@@ -129,11 +129,11 @@ d3.json("county_sales").then(function (data) {
         x: avgSalesCountyNames,
         y: avgSalesPerDispensary,
         text: data.map(county => "Average Sales: $" + commafy(county.avg_sales_per_dispensary) + "<br />Total Sales: $" + commafy(county.sales) + "<br />Dispensary Count: " + county.dispensary_count),
-        name: "Average Sales Per Dispensary",
+        name: "2019 Average Sales Per Dispensary",
         type: "bar"
     }];
     var avgSalesPerDispensaryLayout = {
-        title: "Average Sales Per Dispensary",
+        title: "2019 Average Sales Per Dispensary",
         margin: {
             l: 100,
             r: 100,
