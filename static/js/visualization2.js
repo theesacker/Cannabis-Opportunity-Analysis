@@ -25,6 +25,7 @@ var greyscaleMap = L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/
 });
 
 
+var storesCluster = new L.layerGroup();
 var stores = new L.layerGroup();
 var countyArea = new L.layerGroup();
 var countySales = new L.layerGroup();
@@ -97,6 +98,7 @@ d3.json(queryUrl).then(function (county) {
 var queryUrlRetail = "/retail_map";
 d3.json(queryUrlRetail).then(function (data) {
   var jsonFeatures = [];
+  
   data.forEach(function (store) {
     var lat = store.coords[0];
     var lon = store.coords[1];
@@ -111,7 +113,21 @@ d3.json(queryUrlRetail).then(function (data) {
     jsonFeatures.push(feature);
   })
   var geoJson = { type: 'FeatureCollection', features: jsonFeatures };
-  L.geoJson(geoJson, {
+  var dispensariesCluster = L.geoJson(geoJson, {
+    pointToLayer: function (feature, latlng) {
+      return L.marker(latlng);
+    },
+    onEachFeature: function (feature, layer) {
+      layer.bindPopup(`
+      ${feature.properties.name} 
+      <br>${feature.properties.address}
+      `)
+    }
+  })
+  var clusters = L.markerClusterGroup();
+  clusters.addLayer(dispensariesCluster).addTo(storesCluster);
+
+  var dispensaries = L.geoJson(geoJson, {
     pointToLayer: function (feature, latlng) {
       return L.marker(latlng);
     },
@@ -122,12 +138,20 @@ d3.json(queryUrlRetail).then(function (data) {
       `)
     }
   }).addTo(stores);
+  
+ 
+
+  // .addTo(stores);
 });
 
 // County Data Map Function
 var queryUrlCounty = "/county_sales";
 d3.json(queryUrlCounty).then(function (data) {
   var jsonFeatures = [];
+  var leafIcon = L.icon({
+    iconUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Cannabis_leaf.svg/225px-Cannabis_leaf.svg.png',
+    iconSize: [50,40]
+  });
   data.forEach(function (sales) {
     var lat = sales.coords[0];
     var lon = sales.coords[1];
@@ -144,7 +168,7 @@ d3.json(queryUrlCounty).then(function (data) {
   var geoJson = { type: 'FeatureCollection', features: jsonFeatures };
   L.geoJson(geoJson, {
     pointToLayer: function (feature, latlng) {
-      return L.marker(latlng);
+      return L.marker(latlng, {icon: leafIcon});
     },
     onEachFeature: function (feature, layer) {
       layer.bindPopup(`
@@ -162,10 +186,6 @@ d3.json(queryUrlCounty).then(function (data) {
   L.control.layers(baseMaps, overlayMaps, {
     collapsed: false
   }).addTo(myMap);
-
-
-
-
 });
 
 
@@ -177,8 +197,9 @@ var baseMaps = {
 };
 var overlayMaps = {
   "County Boundaries": countyArea,
-  "Dispensaries": stores,
-  "County Data": countySales
+  "County Data": countySales,
+  "Dispensaries Cluster": storesCluster,
+  "Dispensaries": stores
 };
 
 
